@@ -8,7 +8,7 @@ import hashlib
 import argparse
 
 parser = argparse.ArgumentParser(description="evil list manager")
-parser.add_argument("mode", choices=["l", "w"], help="l: list w: write")
+parser.add_argument("mode", choices=["l", "w", "f"], help="l: list w: write f: get html output")
 args = parser.parse_args()
 
 evildb_path = "/home/tmash/documents/general/evildb.csv"
@@ -83,9 +83,26 @@ def writeData():
     else:
         writeData()
 
-if (args.mode == "l"):
+def getHtml():
+    if (os.path.isfile(evildb_path)):
+        with open(evildb_path, "r") as dbfile:
+            reader = csv.DictReader(dbfile, delimiter="\t")
+            html = ""
+            for row in reader:
+                html += f'''<div class="div-movie-main"><div
+    class="div-movie-name">{row["name"]}</div><div class="div-movie-buttons"><a class="div-movie-imdb"
+    href="https://www.imdb.com/title/{row["imdb"]}/" title="info on imdb">&#8599;</a><a
+    class="div-movie-magnet" href="magnet:?xt=urn:btih:{row["hash"]}" title="magnet
+    link">&#8595;</a></div></div>'''
+        print(html)
+    else:
+        print("[!] no db file found")
+
+if (args.mode == "w"):
+    writeData()
+elif (args.mode == "l"):
     listData()
 else:
-    writeData()
+    getHtml()
 
 exit()
