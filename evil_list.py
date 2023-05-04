@@ -89,11 +89,14 @@ def getHtml():
             reader = csv.DictReader(dbfile, delimiter="\t")
             html = ""
             for row in reader:
-                html += f'''<div class="div-movie-main"><div
-    class="div-movie-name">{row["name"]}</div><div class="div-movie-buttons"><a class="div-movie-imdb"
-    href="https://www.imdb.com/title/{row["imdb"]}/" title="info on imdb">&#8599;</a><a
-    class="div-movie-magnet" href="magnet:?xt=urn:btih:{row["hash"]}" title="magnet
-    link">&#8595;</a></div></div>'''
+                html += f'''
+<div class="div-movie-main">
+    <div class="div-movie-name">{row["name"]}</div>
+    <div class="div-movie-buttons">
+        <a class="div-movie-imdb" href="https://www.imdb.com/title/{row["imdb"]}/" title="info on imdb">&#8599;</a>
+        <a class="div-movie-magnet" href="magnet:?xt=urn:btih:{row["hash"]}" title="magnet link">&#8595;</a>
+    </div>
+</div>'''
         print(html)
     else:
         print("[!] no db file found")
