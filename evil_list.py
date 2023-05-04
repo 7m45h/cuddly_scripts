@@ -92,10 +92,7 @@ def getHtml():
                 html += f'''
 <div class="div-movie-main">
     <div class="div-movie-name">{row["name"]}</div>
-    <div class="div-movie-buttons">
-        <a class="div-movie-imdb" href="https://www.imdb.com/title/{row["imdb"]}/" target="_blank" title="info on imdb">&#8599;</a>
-        <a class="div-movie-magnet" href="magnet:?xt=urn:btih:{row["hash"]}" target="_blank" title="magnet link">&#8595;</a>
-    </div>
+    <a class="div-movie-imdb" href="https://www.imdb.com/title/{row["imdb"]}/" target="_blank" title="info on imdb">&#8599;</a>
 </div>'''
         print(html)
     else:
