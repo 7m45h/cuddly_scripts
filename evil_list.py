@@ -89,11 +89,11 @@ def getHtml():
             reader = csv.DictReader(dbfile, delimiter="\t")
             html = ""
             for row in reader:
-                html += f'''
+                html += f"""
 <div class="div-movie-main">
     <div class="div-movie-name">{row["name"]}</div>
-    <a class="div-movie-imdb" href="https://www.imdb.com/title/{row["imdb"]}/" target="_blank" title="info on imdb">&#8599;</a>
-</div>'''
+    <div class="div-movie-imdb">&#8599;</div>
+</div>"""
         print(html)
     else:
         print("[!] no db file found")
