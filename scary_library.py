@@ -2,7 +2,7 @@
 
 from html.parser import HTMLParser
 
-input_file = "/home/tmash/workspace/dev/harbor/bookmarks.html"
+input_file = "/home/tmash/workspace/dev/warehouse/bookmarks.html"
 urls = ""
 
 class mrParser(HTMLParser):
