@@ -7,11 +7,21 @@ parser = argparse.ArgumentParser(description="manage evil databse")
 parser.add_argument("mode", choices=["l", "a", "u", "g", "d", "n"], help="l: list all a: add new u: update g: get info d: delete n: new table")
 args = parser.parse_args()
 
-def newDatabase(name):
-    print(f"new database {name}")
+con = sqlite3.connect("../warehouse/evil.db")
+cur = con.cursor()
+
+def newDatabase():
+    cur.execute("CREATE TABLE torrents(hash TEXT, name TEXT, year INTEGER, imdb TEXT)")
+
+def addNew():
+    print("[?]")
+    name = input("    name: ")
+    year = input("    year: ")
+    imdb = input("    imdb: ")
+    hash = input("    hash: ")
 
 if (args.mode == "n"):
-    newDatabase("test")
+    newDatabase()
 elif (args.mode == "d"):
     print("delete")
 elif (args.mode == "u"):
@@ -22,3 +32,5 @@ elif (args.mode == "g"):
     print("get")
 else:
     print("list")
+
+exit()
