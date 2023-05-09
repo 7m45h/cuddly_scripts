@@ -11,7 +11,8 @@ con = sqlite3.connect("../warehouse/evil.db")
 cur = con.cursor()
 
 def newDatabase():
-    cur.execute("CREATE TABLE torrents(hash TEXT, name TEXT, year INTEGER, imdb TEXT)")
+    cur.execute("CREATE TABLE torrents(hash TEXT, name TEXT, isMovie INTEGER, year INTEGER, imdb TEXT)")
+    con.commit()
 
 def addNew():
     print("[?]")
@@ -33,4 +34,5 @@ elif (args.mode == "g"):
 else:
     print("list")
 
+con.close()
 exit()
