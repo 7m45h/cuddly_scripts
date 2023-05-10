@@ -20,7 +20,7 @@ def addNew():
     print("[?]")
     hash = input("    hash: ").upper()
     if cur.execute("SELECT hash FROM torrents WHERE hash=?", (hash,)).fetchone() is None:
-        name = input("    name: ").translate(str.maketrans(string.punctuation + string.whitespace, "_"*(len(string.punctuation) + len(string.whitespace)))).lower()
+        name = input("    name: ").translate(str.maketrans(string.whitespace, "_"*len(string.whitespace), string.punctuation)).lower()
         movi = input("    movi: ")
         if movi == 1 or movi == "1":
             year = input("    year: ")
