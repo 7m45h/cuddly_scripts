@@ -5,7 +5,7 @@ import sqlite3
 import argparse
 
 parser = argparse.ArgumentParser(description="manage evil databse")
-parser.add_argument("mode", choices=["l", "a", "g", "d", "n"], help="l: list all a: add new g: get info d: delete n: new table")
+parser.add_argument("mode", choices=["l", "a", "d", "n"], help="l: list all a: add new d: delete n: new table")
 args = parser.parse_args()
 
 con = sqlite3.connect("../warehouse/evil.db")
@@ -61,22 +61,12 @@ def deleteRow():
         cur.execute("DELETE FROM torrents WHERE rowid=?", (id,))
         con.commit()
 
-def getInfo():
-    id = input("[?] id: ")
-    row = cur.execute("SELECT * FROM torrents WHERE rowid=?", (id,)).fetchone()
-    if row is None:
-        print("[!] invalid ID")
-    else:
-        print(f"[{row[0]}]\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
-
 if (args.mode == "n"):
     newDatabase()
 elif (args.mode == "d"):
     deleteRow()
 elif (args.mode == "a"):
     addNew()
-elif (args.mode == "g"):
-    getInfo()
 else:
     listAll()
 
