@@ -62,13 +62,8 @@ def deleteRow():
         con.commit()
 
 def htmlOutput():
-    for row in cur.execute("SELECT * FROM torrents WHERE isMovie=0").fetchall():
-        print(f"""
-<div class="div-movie-main">
-    <div class="div-movie-name">{row[1]}</div>
-    <a class="div-movie-imdb" href="https://www.imdb.com/title/{row[4]}">&#8599;</a>
-</div>
-""")
+    for row in cur.execute("SELECT * FROM torrents WHERE isMovie=1").fetchall():
+        print(f'<a class="a-movie" href="https://www.imdb.com/title/{row[4]}" target="_blank">{row[1]} {row[3]} &#8599;</a>')
 
 if args.mode == "n":
     newDatabase()
@@ -77,7 +72,7 @@ elif args.mode == "d":
 elif args.mode == "a":
     addNew()
 elif args.mode == "o":
-    print("html output")
+    htmlOutput()
 else:
     listAll()
 
