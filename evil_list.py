@@ -61,6 +61,14 @@ def deleteRow():
         cur.execute("DELETE FROM torrents WHERE rowid=?", (id,))
         con.commit()
 
+def getInfo():
+    id = input("[?] id: ")
+    row = cur.execute("SELECT * FROM torrents WHERE rowid=?", (id,)).fetchone()
+    if row is None:
+        print("[!] invalid ID")
+    else:
+        print(f"[{row[0]}]\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
+
 if (args.mode == "n"):
     newDatabase()
 elif (args.mode == "d"):
@@ -68,7 +76,7 @@ elif (args.mode == "d"):
 elif (args.mode == "a"):
     addNew()
 elif (args.mode == "g"):
-    print("get")
+    getInfo()
 else:
     listAll()
 
