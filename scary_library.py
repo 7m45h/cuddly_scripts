@@ -9,7 +9,7 @@ class mrParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         for attr in attrs:
             if attr[0] == "href":
-                print(f'<a class="a-link" href="{urlparse(attr[1]).scheme}://{urlparse(attr[1]).hostname}" target="_blank">{urlparse(attr[1]).hostname} &#8599;</a>')
+                print(f'<a href="{urlparse(attr[1]).scheme}://{urlparse(attr[1]).hostname}/" target="_blank">{urlparse(attr[1]).hostname} &#8599;</a>')
 
 parser = mrParser()
 
