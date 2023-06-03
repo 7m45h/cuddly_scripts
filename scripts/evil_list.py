@@ -20,10 +20,10 @@ def addNew():
     print("[?]")
     imdb = input("    imdb: ")
     existing_row = cur.execute("SELECT imdb, name, year FROM movies WHERE imdb=?", (imdb,)).fetchone()
-    if row is None:
+    if existing_row is None:
         name = input("    name: ")
         year = input("    year: ")
-        hash = input("    hash: ")
+        hash = input("    hash: ").upper()
         poster = input("    poster: ")
         print("[!] summary")
         print(f"    hash: {imdb}")
