@@ -66,7 +66,28 @@ def deleteRow():
         print("[!] did not deleted")
 
 def htmlOutput():
-    print("html output")
+    for row in cur.execute("SELECT imdb, name, year, hash, poster FROM movies").fetchall():
+        imdb = row[0]
+        name = row[1]
+        year = row[2]
+        hash = row[3]
+        poster_bytes = row[4]
+
+        if poster_bytes not None:
+            poster_path = f"/evil_list/assets/posters/{imdb}"
+            with open(f"../outputs{imdb}", "wb") as image:
+                image.write(poster_bytes)
+        else:
+            poster_path = "/evil_list/assets/posters/placeholder"
+
+        print(f"""
+<div class="div-movie-card">
+    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-poster">
+        <img src={poster_path}>
+    </a>
+    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-title">{name} {year}</a>
+</div>
+""")
 
 if args.mode == "n":
     newDatabase()
