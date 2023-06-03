@@ -73,17 +73,17 @@ def htmlOutput():
         hash = row[3]
         poster_bytes = row[4]
 
-        if poster_bytes not None:
-            poster_path = f"/evil_list/assets/posters/{imdb}"
-            with open(f"../outputs{imdb}", "wb") as image:
-                image.write(poster_bytes)
-        else:
+        if poster_bytes is None:
             poster_path = "/evil_list/assets/posters/placeholder"
+        else:
+            poster_path = f"/evil_list/assets/posters/{imdb}"
+            with open(f"../outputs/{imdb}", "wb") as image:
+                image.write(poster_bytes)
 
         print(f"""
 <div class="div-movie-card">
     <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-poster">
-        <img src={poster_path}>
+        <img src="{poster_path}">
     </a>
     <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-title">{name} {year}</a>
 </div>
