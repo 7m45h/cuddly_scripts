@@ -57,6 +57,7 @@ def deleteRow():
     print("[!]")
     print(f"[{row[0]}]\t{row[1]}\t{row[2]}")
     delete = input("[?] delete (y/n): ")
+
     if delete == "y":
         cur.execute("DELETE FROM movies WHERE imdb=?", (imdb,))
         con.commit()
@@ -65,8 +66,7 @@ def deleteRow():
         print("[!] did not deleted")
 
 def htmlOutput():
-    for row in cur.execute("SELECT * FROM torrents WHERE isMovie=1").fetchall():
-        print(f'<a class="a-movie" href="https://www.imdb.com/title/{row[4]}" target="_blank">{row[1]} {row[3]} &#8599;</a>')
+    print("html output")
 
 if args.mode == "n":
     newDatabase()
