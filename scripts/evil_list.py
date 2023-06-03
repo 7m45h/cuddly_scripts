@@ -36,11 +36,11 @@ def addNew():
             poster_bytes = image.read();
 
         write = input("[?] write to db (y/n): ")
-            if write == "y":
-                cur.execute("INSERT INTO movies VALUES (?, ?, ?, ?, ?)", (imdb, name, year, hash, poster_bytes))
-                con.commit()
-            else:
-                print("\n[!] did not wrote to db")
+        if write == "y":
+            cur.execute("INSERT INTO movies VALUES (?, ?, ?, ?, ?)", (imdb, name, year, hash, poster_bytes))
+            con.commit()
+        else:
+            print("\n[!] did not wrote to db")
     else:
         print("\n[!] allready exists")
         print(f"\n    imdb: {existing_row[0]}")
