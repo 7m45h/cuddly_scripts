@@ -83,7 +83,7 @@ def htmlOutput():
         print(f"""
 <div class="div-movie-card">
     <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-poster">
-        <img src="{poster_path}">
+        <img src="{poster_path}" loading="lazy">
     </a>
     <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-title">{name} {year}</a>
 </div>
