@@ -12,7 +12,7 @@ con = sqlite3.connect("../warehouse/evil.db")
 cur = con.cursor()
 
 def newDatabase():
-    cur.execute("CREATE TABLE IF NOT EXISTS movies(imdb TEXT PRIMARY KEY ASC, name TEXT, year INTEGER, hash TEXT NULL, poster BLOB NULL)")
+    cur.execute("CREATE TABLE IF NOT EXISTS movies(imdb TEXT PRIMARY KEY, name TEXT, year INTEGER, hash TEXT NULL, poster BLOB NULL)")
     con.commit()
     print("[!] done")
 
@@ -66,7 +66,7 @@ def deleteRow():
         print("[!] did not deleted")
 
 def htmlOutput():
-    for row in cur.execute("SELECT imdb, name, year, hash, poster FROM movies").fetchall():
+    for row in cur.execute("SELECT imdb, name, year, hash, poster FROM movies ORDER BY name").fetchall():
         imdb = row[0]
         name = row[1]
         year = row[2]
@@ -82,10 +82,10 @@ def htmlOutput():
 
         print(f"""
 <div class="div-movie-card">
-    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-poster">
+    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-poster" target="_blank">
         <img src="{poster_path}" loading="lazy">
     </a>
-    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-title">{name} {year}</a>
+    <a href="https://www.imdb.com/title/{imdb}/" class="a-movie-title" target="_blank">{name} {year}</a>
 </div>
 """)
 
