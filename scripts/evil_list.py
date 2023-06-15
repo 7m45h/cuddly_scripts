@@ -4,22 +4,22 @@ import string
 import sqlite3
 import argparse
 
-parser = argparse.ArgumentParser(description="manage evil databse")
-parser.add_argument("mode", choices=["n", "a", "l", "d", "o"], help="n: new table a: add l: list all d: delete o: html output")
-args = parser.parse_args()
+_parser = argparse.ArgumentParser(description="manage evil databse")
+_parser.add_argument("mode", choices=["n", "a", "l", "d", "o"], help="n: new table a: add l: list all d: delete o: html output")
+args = _parser.parse_args()
 
-con = sqlite3.connect("../warehouse/evil.db")
-cur = con.cursor()
+_con = sqlite3.connect("../warehouse/evil.db")
+_cur = _con.cursor()
 
 def newDatabase():
-    cur.execute("CREATE TABLE IF NOT EXISTS movies(imdb TEXT PRIMARY KEY, name TEXT, year INTEGER, hash TEXT NULL, poster BLOB NULL)")
-    con.commit()
+    _cur.execute("CREATE TABLE IF NOT EXISTS movies(imdb TEXT PRIMARY KEY, name TEXT, year INTEGER, hash TEXT NULL, poster BLOB NULL)")
+    _con.commit()
     print("[!] done")
 
 def addNew():
     print("[?]")
     imdb = input("    imdb: ")
-    existing_row = cur.execute("SELECT imdb, name, year FROM movies WHERE imdb=?", (imdb,)).fetchone()
+    existing_row = _cur.execute("SELECT imdb, name, year FROM movies WHERE imdb=?", (imdb,)).fetchone()
     if existing_row is None:
         name = input("    name: ")
         year = input("    year: ")
@@ -37,8 +37,8 @@ def addNew():
 
         write = input("[?] write to db (y/n): ")
         if write == "y":
-            cur.execute("INSERT INTO movies VALUES (?, ?, ?, ?, ?)", (imdb, name, year, hash, poster_bytes))
-            con.commit()
+            _cur.execute("INSERT INTO movies VALUES (?, ?, ?, ?, ?)", (imdb, name, year, hash, poster_bytes))
+            _con.commit()
         else:
             print("\n[!] did not wrote to db")
     else:
@@ -48,25 +48,25 @@ def addNew():
         print(f"\n    year: {existing_row[2]}")
 
 def listAll():
-    for row in cur.execute("SELECT rowid, imdb, name, year, hash FROM movies").fetchall():
+    for row in _cur.execute("SELECT rowid, imdb, name, year, hash FROM movies").fetchall():
         print(f"[{row[0]}]\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
 
 def deleteRow():
     imdb = input("[?] imdb: ")
-    row = cur.execute("SELECT rowid, name, year FROM movies WHERE imdb=?", (imdb,)).fetchone()
+    row = _cur.execute("SELECT rowid, name, year FROM movies WHERE imdb=?", (imdb,)).fetchone()
     print("[!]")
     print(f"[{row[0]}]\t{row[1]}\t{row[2]}")
     delete = input("[?] delete (y/n): ")
 
     if delete == "y":
-        cur.execute("DELETE FROM movies WHERE imdb=?", (imdb,))
-        con.commit()
+        _cur.execute("DELETE FROM movies WHERE imdb=?", (imdb,))
+        _con.commit()
         print("[!] done")
     else:
         print("[!] did not deleted")
 
 def htmlOutput():
-    for row in cur.execute("SELECT imdb, name, year, hash, poster FROM movies ORDER BY name").fetchall():
+    for row in _cur.execute("SELECT imdb, name, year, hash, poster FROM movies ORDER BY name").fetchall():
         imdb = row[0]
         name = row[1]
         year = row[2]
@@ -100,5 +100,5 @@ elif args.mode == "o":
 else:
     listAll()
 
-con.close()
+_con.close()
 exit()

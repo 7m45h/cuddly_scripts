@@ -4,16 +4,16 @@ import argparse
 import string
 import random
 
-parser = argparse.ArgumentParser(description="generate random ascii strings to use as passwords")
-parser.add_argument("-s", default=10, required=False, type=int, help="password length", metavar="")
-parser.add_argument("-o", default=5, required=False, type=int, help="no of passwords to generate", metavar="")
-parser.add_argument("-L", action="store_true", required=False, help="ascii letters")
-parser.add_argument("-u", action="store_true", required=False, help="ascii uppercase")
-parser.add_argument("-l", action="store_true", required=False, help="ascii lowercase")
-parser.add_argument("-d", action="store_true", required=False, help="digits")
-parser.add_argument("-p", action="store_true", required=False, help="ascii punctuations")
-parser.add_argument("-w", action="store_true", required=False, help="space")
-args = parser.parse_args()
+_parser = argparse.ArgumentParser(description="generate random ascii strings to use as passwords")
+_parser.add_argument("-s", default=10, required=False, type=int, help="password length", metavar="")
+_parser.add_argument("-o", default=5, required=False, type=int, help="no of passwords to generate", metavar="")
+_parser.add_argument("-L", action="store_true", required=False, help="ascii letters")
+_parser.add_argument("-u", action="store_true", required=False, help="ascii uppercase")
+_parser.add_argument("-l", action="store_true", required=False, help="ascii lowercase")
+_parser.add_argument("-d", action="store_true", required=False, help="digits")
+_parser.add_argument("-p", action="store_true", required=False, help="ascii punctuations")
+_parser.add_argument("-w", action="store_true", required=False, help="space")
+args = _parser.parse_args()
 
 def printPass(length, ascii_list, output_size):
     for i in range(output_size):
