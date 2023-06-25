@@ -1,17 +1,15 @@
 #! /usr/bin/env python
 
-from urllib.parse import urlparse
-from html.parser import HTMLParser
+import json
 
-_inputFile = "/home/tmash/workspace/dev/warehouse/bookmarks.html"
+_input = "../warehouse/bookmarks.json"
 
-class mrParser(HTMLParser):
-    def handleStartTag(self, tag, attrs):
-        for attr in attrs:
-            if attr[0] == "href":
-                print(f'<a href="{urlparse(attr[1]).scheme}://{urlparse(attr[1]).hostname}/" target="_blank">{urlparse(attr[1]).hostname} &#8599;</a>')
+with open(_input, 'r') as file:
+    data = json.loads(file.read())
 
-_parser = mrParser()
+for folder in data['children'][1]['children'][0]['children']:
+    print(folder['title'])
+    for item in folder['children']:
+        print(item['uri'])
 
-with open(_inputFile, "r") as file:
-    _parser.feed(file.read())
+exit()

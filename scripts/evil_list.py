@@ -74,16 +74,16 @@ def htmlOutput():
         poster_bytes = row[4]
 
         if poster_bytes is None:
-            poster_path = "/evil_list/assets/posters/placeholder.avif"
+            poster_path = "./assets/posters/placeholder.jpg"
         else:
-            poster_path = f"/evil_list/assets/posters/{imdb}.avif"
-            with open(f"../outputs/{imdb}", "wb") as image:
+            poster_path = f"./assets/posters/{imdb}.jpg"
+            with open(f"../outputs/{imdb}.jpg", "wb") as image:
                 image.write(poster_bytes)
 
         print(f"""
 <div class="div-movie-card">
-    <img type="image/avif" src="{poster_path}" loading="lazy">
-    <a class="anc-ext" href="https://www.imdb.com/title/{imdb}/">{name} {year}</a>
+    <img type="image/jpeg" src="{poster_path}" loading="lazy">
+    <a class="anc-ext" href="https://www.imdb.com/title/{imdb}/" traget="_blank">{name} {year}</a>
 </div>
 """)
 
